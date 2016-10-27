@@ -10,7 +10,13 @@ HDFS:
 HBase:
 1. Data has to be indexed
 2. Data has to be on cluster 
-3 Region Servers store the data physically
+3. Region Servers store the data physically
+4. Master-slave architecture 
+5. HBase uses HDFS as underlying storage 
+
+HBase Modeling types:
+Thick data modeling --> column families have many different columns for each row
+Thin data modeling --> column family size is smaller for each row
 
 $ hadoop fs -ls /apps 
 
@@ -31,14 +37,14 @@ Compaction:
 Minor
 Major
 
-
+# START HBASE 
 $ hbase shell 
 hbase: > create_namespace training;
 > help create_namespace
 
 HBase CRUD operations:
 
- > create 'training:emp', 'ed', 'd' # create table in nama space with column family 
+> create 'training:emp', 'ed', 'd' # create table in nama space with column family 
 > put 'training:emp', 1, 'ed:ename', 'IT Versity'     # loading 1 column for this column 
 
 > scan 'taining:emp'  # it will display record with time stamp 
@@ -59,8 +65,7 @@ When we run the scan, by default it is sorted with ROW KEY
 
 > show_filters;
 
-Master-slave architecture 
-HBase uses HDFS as underlying storage 
+
 
 $ cd /etc/hbase/conf 
 
@@ -69,8 +74,7 @@ To drop the database, disable and drop the database. ***
 > put 'training:emp', 1, 'ed:it|oracle', 0
 > scan 'taining:emp'
 
-Thick data modeling --> column families have 5000 diff  for each row
-Thin data modeling --> column family size is smaller for each row
+
 > put 'training:emp', '1:oracle', 'ed:en', 'Durga'
 > scan 'taining:emp'
 
@@ -81,4 +85,4 @@ Thin data modeling --> column family size is smaller for each row
 > put 'training:eagg', 'cf1
 
  
-Spark DataFrames tomorrow 
+
